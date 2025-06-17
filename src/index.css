@@ -1,0 +1,821 @@
+/* Estilos gerais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estilos da página inicial */
+.home-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    padding: 2rem;
+}
+
+.profile-card {
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 3rem;
+    text-align: center;
+    max-width: 600px;
+    width: 100%;
+    transition: transform 0.3s ease;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease, box-shadow 0.3s ease;
+}
+
+.profile-card:hover {
+    transform: translateY(-10px);
+}
+
+.profile-card.loaded {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.home-profile-img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid #3498db;
+    margin-bottom: 2rem;
+}
+
+.profile-card h1 {
+    color: #2c3e50;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.tagline {
+    color: #7f8c8d;
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.navigation-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.nav-button {
+    display: block;
+    padding: 1rem;
+    background-color: #3498db;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease, background-color 0.3s ease;
+}
+
+.nav-button:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
+}
+
+.nav-button.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Estilos do cabeçalho moderno */
+.header-moderno {
+    background-color: #2c3e50;
+    color: #fff;
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-moderno h1 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #fff;
+    margin: 0;
+}
+
+/* Menu toggle para dispositivos móveis */
+.menu-toggle {
+    display: none; /* Escondido por padrão em telas maiores */
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.8rem;
+    cursor: pointer;
+}
+
+.header-moderno nav ul {
+    display: flex;
+    list-style: none;
+    gap: 1.5rem;
+}
+
+.nav-menu {
+    display: flex;
+}
+
+.nav-menu ul {
+    display: flex;
+    list-style: none;
+    gap: 1.5rem;
+}
+
+.header-moderno nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 0;
+    position: relative;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.header-moderno nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #3498db;
+    transition: width 0.3s ease;
+}
+
+.header-moderno nav ul li a:hover,
+.header-moderno nav ul li a.active {
+    color: #3498db;
+}
+
+.header-moderno nav ul li a:hover::after,
+.header-moderno nav ul li a.active::after {
+    width: 100%;
+}
+
+/* Media query para dispositivos móveis */
+@media (max-width: 767px) {
+    .header-container {
+        padding: 0 1rem;
+    }
+
+    .menu-toggle {
+        display: block; /* Mostra o botão do menu em telas menores */
+    }
+
+    .nav-menu {
+        display: none; /* Esconde o menu por padrão em telas menores */
+        flex-direction: column;
+        position: absolute;
+        top: 60px; /* Ajuste conforme a altura do seu cabeçalho */
+        left: 0;
+        width: 100%;
+        background-color: #2c3e50; /* Mesma cor do cabeçalho */
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        padding: 1rem 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-menu.active {
+        display: flex; /* Mostra o menu quando ativo */
+    }
+
+    .nav-menu ul {
+        flex-direction: column;
+        width: 100%;
+        gap: 0;
+    }
+
+    .nav-menu ul li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-menu ul li a {
+        padding: 0.8rem 1rem;
+        width: 100%;
+        display: block;
+    }
+}
+
+/* Estilos das seções */
+section {
+    padding: 4rem 2rem;
+    scroll-margin-top: 5rem; /* Ajuste para navegação suave com cabeçalho fixo */
+}
+
+.titulo-secao-principal {
+    text-align: center;
+    font-size: 3rem;
+    color: #2c3e50;
+    margin-bottom: 3rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.titulo-secao-principal::after {
+    content: '';
+    display: block;
+    width: 150px;
+    height: 4px;
+    background-color: #3498db;
+    margin: 0.8rem auto 0;
+    border-radius: 2px;
+}
+
+.dark-mode .titulo-secao-principal {
+    color: #f5f5f5;
+}
+
+.dark-mode .titulo-secao-principal::after {
+    background-color: #3498db;
+}
+
+section:nth-child(even) {
+    background-color: #fff;
+}
+
+section h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #2c3e50;
+    font-size: 2rem;
+    position: relative;
+}
+
+section h2::after {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 3px;
+    background-color: #3498db;
+    margin: 0.5rem auto;
+}
+
+.conteudo-secao {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Estilos da seção Sobre Mim */
+/* Container para organizar foto e texto lado a lado */
+.perfil-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+/* Container para a foto */
+.foto-container {
+    flex: 0 0 auto;
+}
+
+.foto-perfil {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.foto-perfil:hover, .profile-hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(52, 152, 219, 0.6);
+    cursor: pointer;
+}
+
+/* Estilos para a seção de interesses abaixo da foto */
+.conteudo-secao > h3 {
+    color: #3498db;
+    margin: 1.5rem 0 0.5rem;
+    text-align: left;
+}
+
+.conteudo-secao > ul {
+    list-style-position: inside;
+    margin-bottom: 2rem;
+    text-align: left;
+}
+
+/* Estilos para listas animadas */
+.lista-animada {
+    list-style-position: inside;
+    margin-bottom: 2rem;
+    text-align: left;
+}
+
+.lista-animada li {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 5px;
+}
+
+.lista-animada li.animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.lista-animada li:hover {
+    background-color: rgba(52, 152, 219, 0.1);
+}
+
+.texto-sobre {
+    text-align: left;
+    flex: 1;
+    padding: 1.5rem;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.texto-sobre p {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.texto-sobre h3 {
+    color: #3498db;
+    margin: 1.5rem 0 0.5rem;
+}
+
+.texto-sobre ul {
+    list-style-position: inside;
+    margin-bottom: 1rem;
+}
+
+/* Estilos da seção Formação Educacional */
+.formacao-item {
+    margin-bottom: 2rem;
+}
+
+.formacao-item h3 {
+    color: #3498db;
+    margin-bottom: 1rem;
+}
+
+.formacao-item ul {
+    list-style: none;
+}
+
+.formacao-item li {
+    margin-bottom: 1.5rem;
+    padding-left: 1rem;
+    border-left: 3px solid #3498db;
+}
+
+.formacao-item h4 {
+    margin-bottom: 0.5rem;
+}
+
+/* Estilos da seção Portfólio */
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.projeto-item {
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.projeto-item:hover {
+    transform: translateY(-10px);
+}
+
+.projeto-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.projeto-item h3 {
+    padding: 1rem 1rem 0.5rem;
+    color: #2c3e50;
+}
+
+.projeto-item p {
+    padding: 0 1rem 1rem;
+}
+
+.btn-projeto {
+    display: block;
+    text-align: center;
+    padding: 0.8rem;
+    background-color: #3498db;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.btn-projeto:hover {
+    background-color: #2980b9;
+}
+
+/* Estilos da seção Contato */
+.formulario-contato {
+    max-width: 600px;
+    margin: 0 auto 2rem;
+}
+
+.form-grupo {
+    margin-bottom: 1.5rem;
+}
+
+.form-grupo label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.form-grupo input,
+.form-grupo textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: inherit;
+}
+
+.form-grupo input:focus,
+.form-grupo textarea:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+.btn-enviar {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.btn-enviar:hover {
+    background-color: #2980b9;
+}
+
+.info-contato {
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.info-contato h3 {
+    color: #3498db;
+    margin-bottom: 1rem;
+}
+
+.info-contato a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+.info-contato a:hover {
+    text-decoration: underline;
+}
+
+/* Estilos do rodapé */
+footer {
+    background-color: #2c3e50;
+    color: #fff;
+    text-align: center;
+    padding: 1.5rem 0;
+}
+
+/* Estilos para fixar o rodapé na parte inferior */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto; /* Impede que o main encolha e garante que ocupe todo o espaço disponível */
+}
+
+footer {
+    flex-shrink: 0; /* Impede que o rodapé encolha */
+    margin-top: auto; /* Empurra o rodapé para baixo quando há espaço disponível */
+}
+
+/* Estilos específicos para as páginas de formação e portfólio */
+.formacao-section, .portfolio-section {
+    min-height: 70vh; /* Garante uma altura mínima para o conteúdo */
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.formacao-page .conteudo-secao, .portfolio-page .conteudo-secao {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Media queries para responsividade */
+@media (min-width: 768px) {
+    .texto-sobre {
+        text-align: left;
+    }
+    
+    .foto-perfil {
+        float: left;
+        margin: 0 2rem 1rem 0;
+    }
+    
+    /* Ajuste para a seção de interesses em telas maiores */
+    .conteudo-secao > h3,
+    .conteudo-secao > ul {
+        text-align: left;
+        margin-left: calc(200px + 2rem); /* Largura da foto + margem */
+    }
+    
+    .conteudo-secao::after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+}
+
+@media (max-width: 767px) {
+    nav ul {
+        flex-direction: column;
+    }
+    
+    nav ul li {
+        margin: 0.5rem 0;
+    }
+    
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Animações genéricas para entrada */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.animated-fade-in-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.animated-fade-in {
+    opacity: 0;
+    animation: fadeIn 0.8s ease-out forwards;
+}
+
+/* Estilos dos ícones sociais na Home */
+.social-icons-home {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.social-icons-home a {
+    font-size: 2.5rem;
+    color: #2c3e50; /* Cor padrão para os ícones */
+    transition: transform 0.3s ease;
+}
+
+.social-icons-home a:hover {
+    transform: scale(1.1);
+}
+
+.social-icons-home .github-icon i {
+    color: #24292e;
+}
+
+.social-icons-home .instagram-icon i {
+    color: #e1306c;
+}
+
+/* Melhorar visibilidade no modo escuro para ícones sociais na Home */
+.dark-mode .social-icons-home a {
+    color: #f5f5f5;
+}
+
+.dark-mode .social-icons-home .github-icon i {
+    color: #f0f6fc;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+/* Estilo da citação no modo claro */
+.citacao {
+    font-style: italic;
+    font-size: 1.2rem;
+    color: #7f8c8d;
+    text-align: center;
+    margin: 3rem 0;
+    padding: 1.5rem;
+    border-left: 5px solid #3498db;
+    background-color: rgba(52, 152, 219, 0.05);
+    border-radius: 0 10px 10px 0;
+}
+
+/* Estilo para o modo escuro específicos da página Sobre */
+.dark-mode body {
+    background-color: #1a1a1a;
+}
+
+.dark-mode .main-moderno {
+    background-color: #1a1a1a;
+}
+
+.dark-mode .sobre-section {
+    background-color: #1a1a1a;
+}
+
+.dark-mode .container {
+    background-color: #1a1a1a;
+}
+
+.dark-mode .perfil-container {
+    background-color: #2c2c2c;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.dark-mode .card {
+    background-color: #2c2c2c;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .card-header h3 {
+    color: #3498db;
+}
+
+.dark-mode .lista-animada li {
+    color: #f5f5f5;
+    border-bottom: 1px solid #444;
+}
+
+.dark-mode .lista-animada li:hover {
+    color: #3498db;
+}
+
+.dark-mode .citacao {
+    color: #bdc3c7;
+    background-color: rgba(52, 152, 219, 0.1);
+}
+
+.dark-mode .texto-sobre {
+    color: #333;
+    background-color: #333;
+}
+
+.dark-mode .perfil-info h2,
+.dark-mode .perfil-info p {
+    color: #333;
+}
+
+/* Estilo para a mensagem de sucesso do formulário */
+.success-message {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    animation: fadeIn 0.5s ease;
+}
+
+.success-message h3 {
+    margin-bottom: 1rem;
+    color: #2c3e50;
+}
+
+/* Efeito de destaque para os itens do portfólio */
+.projeto-item.highlight {
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Botão de alternar modo noturno */
+#theme-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #2c3e50;
+    color: #fff;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    z-index: 1000;
+}
+
+#theme-toggle:hover {
+    transform: scale(1.1);
+}
+
+/* Estilos para o modo noturno */
+.dark-mode {
+    background-color: #1a1a1a;
+    color: #f5f5f5;
+}
+
+.dark-mode header {
+    background-color: #121212;
+}
+
+.dark-mode section:nth-child(even) {
+    background-color: #222;
+}
+
+.dark-mode .profile-card,
+.dark-mode .projeto-item {
+    background-color: #2c2c2c;
+    color: #f5f5f5;
+}
+
+.dark-mode .projeto-item h3,
+.dark-mode section h2,
+.dark-mode .profile-card h1 {
+    color: #3498db;
+}
+
+.dark-mode footer {
+    background-color: #121212;
+}
+
+.dark-mode .form-grupo input,
+.dark-mode .form-grupo textarea {
+    background-color: #333;
+    color: #f5f5f5;
+    border-color: #444;
+}
